@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Sample stage-related template -->
+        <record id="mail_template_project_task_cancel" model="mail.template">
+            <field name="name">Task: Tour Cancelled Acknowledgment</field>
+            <field name="model_id" ref="project.model_project_task"/>
+            <field name="subject">Reception of ${object.name}</field>
+	        <field name="email_from">${object.rating_get_rated_partner_id().email if object.rating_get_rated_partner_id().email else '' | safe}</field>
+            <field name="email_to" >${object.partner_id.email or object.email|safe}</field>
+            <field name="use_default_to" eval="False"/>
+            <field name="body_html" type="html">
+                <div>
+                    Your tour has been cancelled<br />
+                    <br/><br/>
+                    Thank you,
+                    <br/>
+                </div>
+            </field>
+            <field name="auto_delete" eval="True"/>
+<!--            <field name="user_signature" eval="False"/>-->
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,25 @@
+.sh_js_cls_address_autofill{
+    .dropdown-menu{
+        .dropdown-item{
+            cursor: pointer;
+        }
+    }
+}
+// New requirement
+.cls_custom_checkout_address_cls{
+    width: 70%;
+    margin: 0 auto;
+}
+.cls_custom_checkout_address_cls .form-row input.form-control{font-size: 14px;}
+.cls_custom_checkout_address_cls .sh_js_cls_addresses_dropdown{right: 0;top:40%;overflow: hidden;}
+
+@media(max-width:540px){
+	.cls_custom_checkout_address_cls{
+        width: 100%;
+        margin: 0 auto;
+        .row .col-lg-3{
+            text-align: left !important;
+        }
+    }
+    
+}

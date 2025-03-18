@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="sale_share_wizard" model="ir.ui.view">
+        <field name="name">sale.share.wizard</field>
+        <field name="model">sh.wsale.product.question.after.checkout.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Sale Share Service">
+                <group name="share_link">
+                    <field name="share_link" widget="CopyClipboardChar" readonly="1" options="{'string': 'Copy Link'}" />
+                </group>
+                <group>
+                    <field name="order_id" invisible="1"/>
+                    <field name="partner_ids" widget="many2many_tags_email" placeholder="Add contacts to share the document..."/>
+                </group>
+                <group>
+                    <field name="note" placeholder="Add a note"/>
+                </group>
+                <footer>
+                    <button string="Send" name="sh_action_sale_send_mail"  type="object" class="btn-primary" data-hotkey="q"/>
+                    <button string="Cancel" class="btn-default" special="cancel" data-hotkey="z" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="model_sale_order_action_share_service_form" model="ir.actions.server">
+        <field name="name">Share Service Form</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_view_types">form</field>
+        <field name="sequence">0</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_sale_share()</field>
+    </record>
+
+
+</odoo>

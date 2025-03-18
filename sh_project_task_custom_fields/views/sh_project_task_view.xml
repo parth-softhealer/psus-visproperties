@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_task_form2" model="ir.ui.view">
+            <field name="name">view.task.form2.inherit.sh_project_task_custom_fields</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="priority" eval="99"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//group//label[@for='project_id'][1]" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </xpath>
+  
+  
+                    <xpath expr="//group[1]//group[1]/div[1]" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </xpath>
+            
+  
+                    <xpath expr="//field[@name='project_id'][1]" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </xpath>
+                
+                
+  
+  <field name="photographer_id" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field>
+                <field name="is_reshoot" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field>
+
+                <!-- comment by softhealer -->
+                <!-- <field name="sale_line_id" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field> -->
+
+            <field name="sale_order_id" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field>
+      
+
+                <xpath expr="//group//group" position="attributes">
+                    <attribute name="string">ORDER SUMMARY / CLIENT INFO
+                    </attribute>
+                </xpath>
+                <xpath expr="//group//group[2]" position="attributes">
+                    <attribute name="string">PHOTOGRAPHER / PROJECT INFO
+                    </attribute>
+                </xpath>
+                <xpath expr="//page[@name='description_page']" position="attributes">
+                    <attribute name="string">More Order info
+                    </attribute>
+                </xpath>
+                <xpath expr="//field[@name='description']" position="attributes">
+                    <attribute name="string">Service Description
+                    </attribute>
+                </xpath>
+               
+                <xpath expr="//field[@name='state']" position="after">
+                    <div>
+                        <field name="x_studio_services_ordered" widget="image" class="oe_avatar ml-3 h4"/>
+                    </div>
+
+                </xpath>
+                <xpath expr="//field[@name='project_id']" position="before">
+                    <field name="x_studio_sales_order_item" readonly="True"/>
+                    <field name="create_date" readonly="True" string="Order Date/Time"/>
+                    <field name="allow_billable" widget="many2one_avatar" readonly="True" string="Client / Customer Name"/>
+
+                    <field name="x_studio_phone" readonly="True" widget="phone"/>
+                    <field name="x_studio_char_field_xVyMR"/>
+                    <field name="x_studio_contact_" readonly="True" widget="phone"/>
+                    <field name="x_studio_contact_name_1" readonly="True"/>
+                    <field name="x_studio_field_K8PgE" readonly="True" widget="email"/>
+
+                </xpath>
+                <xpath expr="//field[@name='active']" position="after">
+                  
+                            <label for="project_id" invisible="parent_id!='False'" class="oe_read_only"/>
+                            <div colspan="1" class="oe_read_only">
+                                <i class="o_project_task_project_field text-danger" invisible="project_id != 'False'" >Private</i>
+                                <field name="project_id" invisible="parent_id!='False'"  nolabel="1"/>
+                            </div>
+                            <field name="project_id" invisible="parent_id != 'False'" domain="[('active', '=', True), ('company_id', '=', company_id)]"
+                                placeholder="Private" class="o_project_task_project_field oe_edit_only"/>
+                              
+                              
+                  
+                    <field name="project_id" readonly="True" string="Project" domain="[('active', '=', True), ('company_id', '=', company_id)]"/>
+
+                    <field name="x_studio_current_stage" readonly="True" widget="badge"/>
+                    <!--Nikhil commented-->
+                    <!-- <field name="x_studio_property_address" widget="char" readonly="True"/> -->
+                    <field name="x_studio_google_maps" class="o_text_overflow "/>
+                    <field name="photographer_id" widget="many2one_avatar"/>
+                    <field name="start_datetime" readonly="True" string="Scheduled Date"/>
+                    <field name="write_date" readonly="True"/>
+
+
+
+                </xpath>
+                <field name="tag_ids" position="after">
+                    <field name="is_reshoot" string="Site/Tour exists?"/>
+                </field>
+                <field name="description" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field>
+
+
+                <xpath expr="//page[@name='description_page']" position="inside">
+                    <group>
+                        <group string="OTHER ORDER INFO">
+                       
+                            <field name="x_studio_property_status_1" readonly="True" widget="selection"/>
+                            <field name="x_studio_client_order_notes" readonly="True"/>
+                            <field name="x_studio_site_activation" readonly="True" widget="selection"/>
+                            <field name="description" string="Service Description"/>
+                            <field name="x_studio_optional_items_1" readonly="True"/>
+                            <field name="x_studio_domain_name_1" readonly="True"/>
+                            <field name="x_studio_attach_file"/>
+                        </group>
+                    </group>
+
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="tour_links" string="Tour Links">
+                        <group name="studio_group_kDTg8_right" string="iGuide links">
+                         
+                            <field name="x_studio_storybook_link_1" string="iGuide link:" widget="url"/>
+                            <field filename="x_studio_floor_plan_pdf_filename" name="x_studio_floor_plan_pdf" string="Floor plan (PDF)"/>
+                            <field name="x_studio_iguide_billable_sq_ft" widget="integer"/>
+                        </group>
+
+                        <group>
+                        
+                            <group string="Loyalty Tour/Site Links">
+                                <field name="x_studio_storybook_link_2" widget="url"/>
+                            </group>
+                            <group string="Matterport Links">
+                                <field name="x_studio_matterport_link" widget="url"/>
+                            </group>
+                        </group>
+                        <group>
+                     
+                            <group string="Video Links">
+                                <field name="x_studio_vimeo_link" widget="url"/>
+                                <field name="x_studio_youtube_link" widget="url"/>
+                            </group>
+                            <group string="Other links">
+                            
+                                <field name="x_studio_other_1" widget="url"/>
+                                <field name="x_studio_other_2" widget="url"/>
+                            </group>
+                        </group>
+
+
+                    </page>
+                    <page name="tour_site_links" string="Tour/Site Links">
+                        <group>
+                            <group string="STANDARD TOUR/SITE LINKS">
+                                <field name="backend_url" string="Edit this tour/site" widget="url" readonly="True"/>
+                                <field name="x_studio_branded_tour" widget="url"/>
+                                <field name="x_studio_un_branded_tour" widget="url"/>
+                            </group>
+                            <group string="LOYALTY TOUR/SITE LINKS">
+
+                            </group>
+                        </group>
+                    </page>
+
+                </xpath>
+                <xpath expr="//page[@name='sub_tasks_page']" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </xpath>
+                <xpath expr="//page[@name='extra_info']" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </xpath>
+
+                <field name="user_ids" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field>
+                <field name="parent_id" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field>
+                <field name="partner_id" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field>
+                <field name="planned_date_begin" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field>
+                <field name="date_deadline" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field>    
+
+        
+
+                <!-- <field name="planned_date_end" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </field> -->
+
+                <!-- <label for="planned_date_begin" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </label>
+                <div class="o_row" position="attributes">
+                    <attribute name="invisible">1
+                    </attribute>
+                </div>  -->
+                            
+
+
+            </field>
+        </record>
+
+
+
+    </data>
+</odoo>

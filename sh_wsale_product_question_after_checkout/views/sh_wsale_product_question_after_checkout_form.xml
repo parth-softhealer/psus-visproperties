@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+
+    <template id="qustion_request_form" name="Extra Information Form">
+
+        <t t-call="website.layout">
+            <div class="container sh_wsale_product_question_after_checkout_wrap">
+
+                <form id="sh_extra_information_form" t-attf-action="/sh_wsale_product_question_after_checkout?sale_order_id={{ str(sale_order_obj.id) }}&amp;access_token={{access_token}}" enctype="multipart/form-data" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+
+
+
+
+                    <t t-if="order_line">
+                        <t t-foreach="order_line" t-as="line">
+                            <t t-if="line.product_id.categ_id.sh_wsale_product_question_after_checkout_sh_question_ids">
+                                <h3 class="sh_title">
+                                    <t t-esc="line.product_id.name"/>
+                                </h3>
+                                <div class="sh_question_section">
+                                    <t t-foreach="line.product_id.categ_id.sh_wsale_product_question_after_checkout_sh_question_ids" t-as="question">
+                                        <t t-call="sh_wsale_product_question_after_checkout.sh_registration_question"/>
+                                    </t>
+                                </div>
+                            </t>
+                        </t>
+                    </t>
+
+                    <button type="submit" class="btn btn-primary sh_submit">Submit</button>
+
+
+                </form>
+            </div>
+        </t>
+
+    </template>
+
+    <template id="sh_registration_question" name="sh Registration Question">
+        <label t-out="question.title" t-attf-class="sh_question"/>
+        <span t-if="question.is_mandatory_answer" t-attf-class="sh_mandatory">*</span>
+        <div>
+            <span t-out="question.question_dec" class="text-muted"/>
+        </div>
+        <t t-if="question.question_type == 'char_box'">
+            <input t-attf-class="form-control #{error.get('%s_%s' % (line.id,question.id)) and 'is-invalid' or ''}" t-att-type="text" t-attf-name="#{line.id}_#{question.id}" t-att-required="question.is_mandatory_answer" t-att-value="'%s_%s' % (line.id,question.id) in save_value and save_value['%s_%s' % (line.id,question.id)]" />
+            <span class="sh_input_line"></span>
+            <div class="sh_error">
+                <span t-if="error.get('%s_%s' % (line.id,question.id))" t-esc="question.error_message"/>
+            </div>
+        </t>
+        <t t-elif="question.question_type == 'simple_choice'">
+            <div>
+                <div t-attf-class="row form-check  #{error.get('%s_%s' % (line.id,question.id)) and 'is-invalid' or ''}" t-attf-name="#{line.id}_#{question.id}" data-question-type="simple_choice_radio">
+                    <div t-attf-class="col-lg-12 form-check d-flex flex-wrap">
+                        <t t-foreach="question.answer_ids" t-as="answer">
+                            <div class="form-check col-lg-12 sh_radiofield">
+
+                                <input type="radio" t-attf-id="#{line.id}_#{question.id}_#{answer.id}" t-attf-class="form-check-input" t-attf-name="#{line.id}_#{question.id}" t-att-required="question.is_mandatory_answer" t-att-value="answer.id" t-att-checked="'checked' if '%s_%s' % (line.id,question.id) in save_value and str(save_value['%s_%s' % (line.id,question.id)]) == str(answer.id) else None">
+                                    <label t-attf-for="#{line.id}_#{question.id}_#{answer.id}" t-attf-class="form-check-label">
+                                        <span t-esc="answer.name"/>
+                                    </label>
+                                </input>
+
+
+
+                            </div>
+
+                        </t>
+
+                    </div>
+                </div>
+
+                <div>
+                    <span t-if="error.get('%s_%s' % (line.id,question.id))" t-esc="question.error_message"/>
+                </div>
+            </div>
+        </t>
+        <t t-elif="question.question_type == 'file'">
+
+            <div>
+                <input type="file" t-attf-name="#{line.id}_#{question.id}" t-attf-class="form-control #{error.get('%s_%s' % (line.id,question.id)) and 'is-invalid' or ''}" t-att-required="question.is_mandatory_answer" t-att-value="'%s_%s' % (line.id,question.id) in save_value and save_value['%s_%s' % (line.id,question.id)]"/>
+            </div>
+            <div>
+                <a t-if="'%s_%s' % (line.id,question.id) in save_value" target='_blank' t-attf-href="/web/content/sh.wsale.product.question.answer/#{save_value['%s_%s' % (line.id,question.id)]}/value_file?download=1&amp;access_token={{access_token}}">
+                    <i class='fa fa-download'></i> download attached file
+                </a>
+            </div>
+            <div>
+                <span t-if="error.get('%s_%s' % (line.id,question.id))" t-esc="question.error_message"/>
+            </div>
+        </t>
+        <t t-elif="question.question_type == 'text_box'">
+            <textarea t-attf-name="#{line.id}_#{question.id}" t-attf-class="form-control #{error.get('%s_%s' % (line.id,question.id)) and 'is-invalid' or ''}" t-att-required="question.is_mandatory_answer"><t t-if="'%s_%s' % (line.id,question.id) in save_value" t-esc="save_value['%s_%s' % (line.id,question.id)] or None"/></textarea>
+            <span class="sh_input_line"></span>
+            <div>
+                <span t-if="error.get('%s_%s' % (line.id,question.id))" t-esc="question.error_message"/>
+            </div>
+        </t>
+
+    </template>
+
+
+
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	
+	<!-- Website sale address -->
+	<template id="sh_wsale_address_google_place_address" inherit_id="website_sale.address" name="Website Sale Google Address autofill">
+		<xpath expr="//div[contains(@t-attf-class, 'div_street')]" position="before">
+			<div class="form-group col-lg-12 js_cls_address_input_div" t-if='website.google_maps_api_key'>
+                 <label class="col-form-label" for="address">Address</label>
+                 <input type="text" name="address" class="form-control" value="" />
+             </div>
+		</xpath>
+	</template>
+	
+	<!-- Portal Profile address -->
+	<template id='sh_wsale_address_google_place_profile_add' inherit_id="portal.portal_my_details" name="Portal Profile Google Address autofill">
+		<xpath expr="//div[hasclass('clearfix')][2]" position="after">
+			<div class="form-group col-xl-12 js_cls_address_input_div sh_portal_profile" t-if='website.google_maps_api_key'>
+                 <label class="col-form-label" for="address">Address</label>
+                 <input type="text" name="address" class="form-control" value="" />
+             </div>
+		</xpath>
+	</template>
+</odoo>

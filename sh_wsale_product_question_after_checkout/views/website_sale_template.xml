@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="sh_confirmation" inherit_id="website_sale.confirmation">
+
+
+        <xpath expr="//div[@id='oe_structure_website_sale_confirmation_1']" position="before">
+
+            <t t-if="any(order.order_line.product_id.categ_id.sh_wsale_product_question_after_checkout_sh_question_ids)">
+                <a t-attf-href="/sh_wsale_product_question_after_checkout?sale_order_id={{ str(order.id) }}&amp;access_token={{order.access_token}}" target="_blank" class="btn btn-primary btn_cta">
+            Click here to fill out a form regarding the service you have purchased </a>
+            </t>
+        </xpath>
+    </template>
+</odoo>

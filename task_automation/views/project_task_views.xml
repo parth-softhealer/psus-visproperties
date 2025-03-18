@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+       <record id="view_project_task_type_inherit_visual" model="ir.ui.view">
+            <field name="name">project.task.type.inherit</field>
+            <field name="model">project.task.type</field>
+            <field name="inherit_id" ref="project.task_type_edit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='fold']" position="after">
+                    <field name="state" />
+                </xpath>
+<!--                 <xpath expr="//field[@name='sequence']" position="after">-->
+<!--                    <field name="is_scheduled"/>-->
+<!--                </xpath>   -->
+            </field>
+        </record>
+
+        <record id="view_task_form2_inherit_visual" model="ir.ui.view">
+            <field name="name">view.task.form2.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button type="object" name="action_view_bill" class="oe_stat_button" invisible="invoice_id=='False'" icon="fa-dollar" string="Vendor Bill"/>   
+                    <!-- attrs="{'invisible':[('invoice_id', '=', False)]}"  -->
+                    <field name="invoice_id" invisible="1" force_save="1"/>
+                </xpath>
+                <xpath expr="//field[@name='project_id']" position="after">
+                    <field name="iguide_client_address" invisible="1" readonly="1"/>
+                    <field name="is_processed" readonly="1"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_task_tree2_inherit_visual" model="ir.ui.view">
+            <field name="name">view.task.tree2.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_tree2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="start_datetime"/>
+                </xpath>
+            </field>
+        </record>
+
+        <template id="message_user_assigned_inherit_task_automation"
+                  inherit_id="mail.message_user_assigned">
+                  <!-- comment by softhelaler  -->
+            <!-- <xpath expr="//p/span[2]" position="after">
+                <t t-if="object._name == 'project.task'">
+                    <br/>
+                    <br/>
+                    <strong>ORDER DETAILS</strong>
+                    <table style="font-size:12px;text-align:left;margin-top:13px;" border="0">
+                        <thead>
+                            <th>Agent/Client</th>
+                            <th>Listing Contact</th>
+                        </thead>
+                        <tr>
+                            <td><span t-esc="object.partner_id.name"/></td>
+                            <td><span t-esc="object.x_studio_contact_name"/></td>
+                        </tr>
+                        <tr>
+                            <td>Phone:<span t-esc="object.partner_id.phone"/></td>
+                            <td>Phone:<span t-esc="object.x_studio_contact_phone"/></td>
+                        </tr>
+                        <tr>
+                            <td>Email:<span t-esc="object.partner_id.email"/></td>
+                            <td>Email:<span t-esc="object.partner_id.email"/></td>
+                        </tr>
+                    </table>
+                </t>
+            </xpath> -->
+            <!-- <xpath expr="//p[2]" position="after">
+                <t t-if="object._name == 'project.task'">
+                    <br/>
+                    <strong>LISTING ADDRESS:</strong><br/><br/>
+                    <span style="padding-top:10px;padding-bottom:20px;font-size:12px;padding-top:20px;">
+                        <t t-esc="object.x_studio_property_address"/><a t-att-href="object.x_studio_google_maps" style="padding-left:10px;">Map Link</a>
+                    </span>
+                    <br/><br/>
+                    <strong>ORDER NOTES:</strong><br/><br/>
+                    <span style="padding-top:10px;padding-bottom:20px;font-size:12px;padding-top:20px;">
+                        <b><t t-esc="object.x_studio_order_notes"/></b>
+                    </span>
+                     <div style="overflow-wrap: break-word;hyphens: auto;font-size:9px;padding-top:10px;text-align:center;">
+                         Please contact the customer as soon as possible to acknowledge receipt of the assignment and to set the appointment. if you are unable to take this assignment, please forward this email to <a href="mailto:info@visproperties.com">info@visproperties.com</a> or re-assign the selected Photographer to another team member.
+                     </div>
+                </t>
+            </xpath> -->
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="sh_sale_order_portal_content" inherit_id="sale.sale_order_portal_content" name="Sales Order Portal Content">
+
+        <xpath expr="//section[@id='details']" position="after">
+
+
+            <t t-if="sale_order and sale_order.order_line and sale_order.sudo().order_line.sudo().product_id.sudo().categ_id and any(sale_order.sudo().order_line.sudo().product_id.sudo().categ_id.sudo().sh_wsale_product_question_after_checkout_sh_question_ids.sudo())">
+                <section id="service_form" class="mt-5">
+
+                    <h3 class="" data-anchor="true">Service Form</h3>
+                    <hr class="mt-0 mb-1"/>
+                    <a t-attf-href="/sh_wsale_product_question_after_checkout?sale_order_id={{ str(sale_order.id) }}&amp;access_token={{sale_order.access_token}}" target="_blank" class="btn btn-primary btn_cta">
+            Click here to fill out a form regarding the service you have purchased </a>
+                </section>
+            </t>
+
+
+        </xpath>
+    </template>
+
+
+</odoo>

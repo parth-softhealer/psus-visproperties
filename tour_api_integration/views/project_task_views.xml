@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_project_task_inherit_visual" model="ir.ui.view">
+            <field name="name">project.task.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='photographer_id']" position="after">
+                    <field name="is_reshoot"/>
+                </xpath>
+	            <xpath expr="//field[@name='is_reshoot']" position="after">
+                 <field name="backend_url" invisible="backend_url=='0'"  widget="url"/>  
+
+                    <!-- <field name="backend_url" attrs="{'invisible':[('backend_url','=',False)]}" widget="url"/> -->
+                </xpath>
+            </field>
+        </record>
+
+       <record id="view_project_task_type_inherit_visual" model="ir.ui.view">
+            <field name="name">project.task.type.inherit</field>
+            <field name="model">project.task.type</field>
+            <field name="inherit_id" ref="project.task_type_edit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='mail_template_id']" position="after">
+                    <field name="is_media_uploaded" />
+                    <field name="is_cancel"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

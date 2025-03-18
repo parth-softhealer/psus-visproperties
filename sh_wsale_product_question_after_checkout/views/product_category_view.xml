@@ -1,0 +1,68 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="product_category_form_view_inherit" model="ir.ui.view">
+        <field name="name">product.category.form.view.inherit</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//sheet" position="inside">
+
+                    <notebook>
+                        <page string="Questions" name="sh_wsale_product_question_after_checkout_sh_question_ids">
+                            <field name="sh_wsale_product_question_after_checkout_sh_question_ids" nolabel="1" string="Questions">
+                                <list>
+                                    <field name="sequence" widget="handle" />
+                                    <field name="title"/>
+                                    <field name="is_mandatory_answer" string="Mandatory"/>
+                                    <field name="question_type" string="Type"/>
+                                    <field name="answer_ids" widget="many2many_tags" invisible="question_type != 'simple_choice'"/>
+                                    <!-- attrs="{'invisible' :[('question_type','!=','simple_choice')]}" -->
+                                </list>
+
+                                <!-- Form View  -->
+                                <form string="Question">
+                                    <sheet>
+                                        <h1 class="d-flex">
+                                            <field name="title" placeholder='e.g. "Do you have any diet restrictions?"' class="flex-grow-1"/>
+                                        </h1>
+                                        <group>
+                                            <group>
+                                                <!-- <field name="question_dec"/> -->
+                                                <field name="is_mandatory_answer"/>
+                                                <field name="error_message" invisible="not is_mandatory_answer"/>
+                                                <!-- attrs="{'invisible': [('is_mandatory_answer', '!=', True)]}" -->
+                                                <field name="question_type" widget="radio"/>
+                                            </group>
+                                        </group>
+
+                                        <notebook>
+                                            <page string="Description">
+                                                <field name="question_dec" placeholder="Write Question Description here..."/>
+                                            </page>
+                                            <page string="Answers" invisible="question_type != 'simple_choice'">
+                                            <!-- attrs="{'invisible': [('question_type', '!=', 'simple_choice')]}" -->
+                                                <field name="answer_ids" readonly="0">
+                                                    <list editable="bottom">
+                                                        <field name="sequence" widget="handle" />
+                                                        <field name="name"/>
+                                                    </list>
+                                                </field>
+                                            </page>
+
+                                        </notebook>
+
+                                    </sheet>
+                                </form>
+
+                            </field>
+                        </page>
+
+
+                    </notebook>
+
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>

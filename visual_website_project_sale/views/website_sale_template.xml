@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="address_visual" inherit_id="website_sale.address">
+        <xpath expr="//input[@id='shipping_use_same']/.." position="attributes">
+            <attribute name="class">o_hidden</attribute>
+        </xpath>
+        <xpath expr="//input[@id='shipping_use_same']" position="replace">
+            <input type="checkbox" id='shipping_use_same' class="mr8" name='use_same' />
+        </xpath>
+    </template>
+
+    <!-- comment by softhealer -->
+
+    
+    <!-- <template id="checkout_visual" inherit_id="website_sale.checkout">
+        <xpath expr="//div[hasclass('all_shipping')]//t[@t-call='website_sale.address_kanban']" position="replace">
+            <t t-call="website_sale.address_kanban">
+                <t t-set="actual_partner" t-value="order.partner_id" />
+                <t t-set='contact' t-value="ship"/>
+                <t t-set='selected' t-value="False"/>
+                <t t-set='readonly' t-value="False"/>
+                <t t-set='edit_billing' t-value="True"/>
+            </t>
+        </xpath>
+        <xpath expr="//a[@href='/shop/confirm_order']" position="attributes">
+            <attribute name="href">/shop/address</attribute>
+        </xpath>
+    </template>
+
+    <template id="short_cart_summary_visual" inherit_id="website_sale.short_cart_summary">
+        <xpath expr="//a[@href='/shop/checkout?express=1']" position="attributes">
+            <attribute name="href">/shop/checkout</attribute>
+        </xpath>
+    </template>
+
+    <template id="cart_visual" inherit_id="website_sale.cart">
+        <xpath expr="//a[@href='/shop/checkout?express=1']" position="attributes">
+            <attribute name="href">/shop/checkout</attribute>
+        </xpath>
+        <xpath expr="//a[@href='/shop/checkout?express=1']" position="attributes">
+            <attribute name="href">/shop/checkout</attribute>
+        </xpath>
+    </template> -->
+</odoo>

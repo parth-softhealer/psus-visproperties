@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="vis_properties_purchase_order_form_inhrt_task_automation" model="ir.ui.view">
+            <field name="name">vis.properties.purchase.order.form.inhrt.task.automation</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//field[@name='order_line']/list/field[@name='name']" position="after">
+                    <field name="date_planned"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

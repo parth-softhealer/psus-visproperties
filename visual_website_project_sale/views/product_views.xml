@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_product_timesheet_form_inherit_visual" model="ir.ui.view">
+        <field name="name">product.template.timesheet.form.visual</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="sale_timesheet.view_product_timesheet_form"/>
+        <field name="arch" type="xml">
+            <field name="service_policy" position="attributes">
+            <!-- comment by softhealer -->
+                <!-- <attribute name="attrs">{'invisible': [('type','=','product')]}</attribute> -->
+                 <attribute name="invisible">type == 'product'</attribute>
+            </field>
+            <!-- <field name="service_tracking" position="attributes">
+                <attribute name="attrs">{'invisible': [('type','=','product')]}</attribute>
+            </field> -->
+        </field>
+    </record>
+</odoo>

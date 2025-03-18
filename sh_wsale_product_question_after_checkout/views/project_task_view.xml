@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<odoo>
+    <record id="project_task_form_view_inherit" model="ir.ui.view">
+        <field name="name">project.task.form.view.inherit</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//notebook" position="inside">
+                    <page name="questions_answers" string="Questions and Answers">
+                        <field name="sh_wsale_product_question_after_checkout_sh_question_answer_ids" nolabel="1" string="Questions">
+                            <list editable="bottom">
+                                <field name="create_date"/>
+                                <!-- <field name="question_id" options="{'no_create': True}" /> -->
+                                <field name="question_type" string="Type" />
+                                <field name="value_answer_id" attrs="{'invisible': [('question_type', '!=', 'simple_choice')]}" domain="[('question_id', '=', question_id)]" options="{'no_create': True}"/>
+                                <field name="value_text_box" attrs="{'invisible': [('question_type', '==', 'simple_choice')]}" />
+                                <field name="value_char_box"/>
+                                <field name="value_file" widget="binary"/>
+                            </list>
+                        </field>
+                    </page>
+                </xpath>
+            </data>
+        </field>
+    </record>
+</odoo>
