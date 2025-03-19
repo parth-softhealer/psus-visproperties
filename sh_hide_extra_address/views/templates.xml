@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="custom_delivery_address_row" inherit_id="website_sale.delivery_address_row">
+            <t t-set="addresses" position="attributes">
+                <attribute name="t-value">order.partner_shipping_id</attribute>
+            </t>
+            <!-- <xpath expr="//t[@t-call='website_sale.address_row']" position="replace">
+                <t t-call="website_sale.address_row">
+                    <t t-set="is_invoice" t-value="False"/>
+                    <t t-set="addresses" t-value="order.partner_shipping_id"/>
+                    <t t-set="selected_address" t-value="order.partner_shipping_id"/>
+                </t>
+            </xpath> -->
+        </template>
+
+        <template id="billing_address_row" inherit_id="website_sale.billing_address_row">
+            <t t-set="addresses" position="attributes">
+                <attribute name="t-value">order.partner_invoice_id</attribute>
+            </t>
+        </template>
+    </data>
+</odoo>
